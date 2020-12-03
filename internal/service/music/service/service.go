@@ -14,9 +14,9 @@ type Music struct {
 }
 
 type Service interface {
-	AddMusic(Music) (Music, error)
-	FindAll() ([]*Music, error)
-	FindByID(int) (*Music, error)
+	CreateMusic(Music) (Music, error)
+	ReadAll() ([]*Music, error)
+	ReadMusic(int) (*Music, error)
 	UpdateMusic(Music) (bool, error)
 	RemoveMusic(int) (bool, error)
 } 
@@ -31,7 +31,7 @@ func New(db *sqlx.DB, c *config.Config) (Service, error){
 }
 
 
-func (s service) AddMusic(m Music) (Music, error)  { 
+func (s service) CreateMusic(m Music) (Music, error)  { 
 	query := "INSERT INTO music (name, artist, year) VALUES (?,?, ?)" 
 	res, err := s.db.Exec(query, m.Name, m.Artist, m.Year)
 	if err != nil{
@@ -43,7 +43,7 @@ func (s service) AddMusic(m Music) (Music, error)  {
 }
 
 
-func (s service) FindAll() ([]*Music, error) {
+func (s service) ReadAll() ([]*Music, error) {
 	var arr []*Music
 	query := "SELECT * FROM music"
 	if err := s.db.Select(&list,query); 
@@ -54,7 +54,7 @@ func (s service) FindAll() ([]*Music, error) {
 }
 
 
-func (s service) FindByID(ID int) (*Music, error) {
+func (s service) ReadMusic(ID int) (*Music, error) {
 	var music Music
 	query := "SELECT * FROM music WHERE ID = ?"
 	if err := s.db.Get(&music, query, ID); 
