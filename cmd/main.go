@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"os"
 	"flag"
-	"github.com/SeminarioGo/internal/config"
-	"github.com/SeminarioGo/internal/database"
-	"github.com/SeminarioGo/internal/service/music"
+	"github.com/GiancarloCristiano/SeminarioGo/internal/config"
+	"github.com/GiancarloCristiano/SeminarioGo/internal/database"
+	"github.com/GiancarloCristiano/SeminarioGo/internal/service/music"
 	"github.com/gin-gonic/gin"
 	"github.com/jmoiron/sqlx" 
 )
@@ -36,7 +36,7 @@ func main() {
 }
 
 func readConfig() *config.Config{
-	configFile := flag.String("config","./config.yaml","this is the service config")
+	configFile := flag.String("config","./config.yaml","This is the Service configuration")
 	flag.Parse() 
 
 
