@@ -54,7 +54,7 @@ func createSchema(db *sqlx.DB) error {
 	schema := `CREATE TABLE IF NOT EXISTS music (
 		id integer primary key autoincrement,
 		name varchar,
-		author varchar,
+		artist varchar,
 		year integer
 		);`
 
